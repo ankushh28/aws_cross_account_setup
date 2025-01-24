@@ -1,0 +1,82 @@
+name: Cloud Development Kit Deployment (Reusable)
+
+on:
+  workflow_call:
+    inputs:
+      gh_environment:
+        description: 'Specifies the GitHub deployment environment.'
+        required: false
+        type: string
+        default: null
+      deploy_path:
+        required: true
+        type: string
+      package_manager:
+        required: true
+        type: string
+      aws_region:
+        description: 'AWS Region'
+        required: true
+        type: string
+      additional_commands:
+        description: 'Additional commands to run before deployment'
+        required: false
+        type: string
+    secrets:
+      AWS_OIDC_ROLE_ARN:
+        description: 'OIDC Role'
+        required: true
+
+permissions:
+  id-token: write  # Required for requesting the JWT.
+  contents: read
+  packages: write
+  pull-requests: write
+
+jobs:
+  deploy:
+    name: Deploy to ${gh_environment} in region ${{ inputs.aws_region }} 🚀
+    runs-on: ubuntu-latest
+    environment: ${{ inputs.gh_environment }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'  # Use Python 3.11, change if necessary.
+
+      - name: Install dependencies from requirements.txt
+        run: |
+          pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Install AWS CDK
+        run: |
+          pip install aws-cdk-lib
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-region: ${{ inputs.aws_region }}
+          role-to-assume: ${{ secrets.AWS_OIDC_ROLE_ARN }}
+          role-session-name: 'GitHub-CDK-deployment'
+
+      - name: Run additional commands (if any)
+        if: ${{ inputs.additional_commands }}
+        run: |
+          echo "Running additional commands"
+          eval "${{ inputs.additional_commands }}"
+
+      - name: Deploy the CDK project 🚀
+        run: |
+          for dir in ${{ inputs.deploy_path }}
+          do
+            echo "Deploying CDK in $dir"
+            cd $dir
+            cdk synth
+            cdk deploy --require-approval never --verbose --region ${{ inputs.aws_region }}
+            echo "Deployed in $dir"
+            cd - > /dev/null
+          done
