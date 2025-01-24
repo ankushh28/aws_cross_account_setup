@@ -74,8 +74,10 @@ jobs:
           for dir in ${{ inputs.deploy_path }}
           do
             echo "Deploying CDK in $dir"
-            cd $dir
+            cd /home/runner/work/aws_cross_account_setup/aws_cross_account_setup
             pwd
+            pip install -r requirements.txt
+            pip
             cdk synth
             cdk deploy --require-approval never --verbose --region ${{ inputs.aws_region }}
             echo "Deployed in $dir"
