@@ -60,9 +60,8 @@ jobs:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          aws-region: ${{ inputs.aws_region }}
-          role-to-assume: 'arn:aws:iam::940482450825:role/deployment'
-          role-session-name: 'GitHub-CDK-deployment'
+          aws-region: ap-south-1
+          role-to-assume: arn:aws:iam::940482450825:role/deployment
 
       - name: Run additional commands (if any)
         if: ${{ inputs.additional_commands }}
