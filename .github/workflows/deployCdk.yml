@@ -85,6 +85,7 @@ jobs:
           for dir in ${{ inputs.deploy_path }}
           do
             echo "Deploying CDK in $dir"
+            cd /home/runner/work/aws_cross_account_setup/aws_cross_account_setup
             cd $dir
             pwd
             pip install -r requirements.txt
