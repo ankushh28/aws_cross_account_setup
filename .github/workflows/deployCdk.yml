@@ -77,7 +77,8 @@ jobs:
             cd /home/runner/work/aws_cross_account_setup/aws_cross_account_setup
             pwd
             pip install -r requirements.txt
-            pip
+            pip install aws-cdk-lib
+            pip install contructs
             cdk synth
             cdk deploy --require-approval never --verbose --region ${{ inputs.aws_region }}
             echo "Deployed in $dir"
