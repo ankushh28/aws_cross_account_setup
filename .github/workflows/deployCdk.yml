@@ -85,7 +85,10 @@ jobs:
           for dir in ${{ inputs.deploy_path }}
           do
             echo "Deploying CDK in $dir"
+            pwd
             cd /home/runner/work/aws_cross_account_setup/aws_cross_account_setup/$dir
+            pwd
+            cd $dir
             pwd
             pip install -r requirements.txt
             pip install aws-cdk-lib
