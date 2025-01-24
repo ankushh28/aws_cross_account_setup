@@ -22,7 +22,6 @@ jobs:
       deploy_path: './'
       aws_region: 'ap-south-1'
       package_manager: 'pip3'  # Using pip3 for Python
-    env:
-      ENV_NAME: int
+      env: int
     secrets:
       AWS_OIDC_ROLE_ARN: ${{ secrets.AWS_OIDC_ROLE_ARN }}

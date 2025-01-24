@@ -22,6 +22,10 @@ on:
         description: 'Additional commands to run before deployment'
         required: false
         type: string
+      env:
+        description: 'Environment'
+        required: true
+        type: string
     secrets:
       AWS_OIDC_ROLE_ARN:
         description: 'OIDC Role'
@@ -75,6 +79,8 @@ jobs:
           eval "${{ inputs.additional_commands }}"
 
       - name: Deploy the CDK project 🚀
+        env:
+            ENV_NAME: ${{ inputs.env }}
         run: |
           for dir in ${{ inputs.deploy_path }}
           do
