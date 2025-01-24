@@ -19,7 +19,7 @@ jobs:
     uses: ./.github/workflows/deployCdk.yml
     with:
       gh_environment: int
-      deploy_path: './'
+      deploy_path: '/'
       aws_region: 'ap-south-1'
       package_manager: 'pip3'  # Using pip3 for Python
       env: int
