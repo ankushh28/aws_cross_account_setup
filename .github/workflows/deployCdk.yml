@@ -78,7 +78,6 @@ jobs:
             pwd
             pip install -r requirements.txt
             pip install aws-cdk-lib
-            pip install contructs
             cdk synth
             cdk deploy --require-approval never --verbose --region ${{ inputs.aws_region }}
             echo "Deployed in $dir"
