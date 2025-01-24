@@ -74,6 +74,8 @@ jobs:
           for dir in ${{ inputs.deploy_path }}
           do
             echo "Deploying CDK in $dir"
+            cd $dir
+            pwd
             cdk synth
             cdk deploy --require-approval never --verbose --region ${{ inputs.aws_region }}
             echo "Deployed in $dir"
