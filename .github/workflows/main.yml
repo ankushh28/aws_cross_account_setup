@@ -1,0 +1,27 @@
+name: CDK Deployment
+
+on:
+  push:
+    branches:
+      - develop
+      - feature/*
+
+permissions:
+  id-token: write
+  contents: read
+  packages: write
+  pull-requests: write
+
+jobs:
+  INT:
+    name: Deploy to INT 🚀
+    if: github.ref == 'refs/heads/develop' || startsWith(github.ref, 'refs/heads/feature/')
+    uses: ./.github/workflows/deployCdk.yml
+    with:
+      gh_environment: int
+      deploy_path: './PocStack1Module/sqs/
+      aws_region: 'ap-south-1'
+      package_manager: 'pip3'  # Using pip3 for Python
+    secrets:
+      AWS_OIDC_ROLE_ARN: ${{ secrets.AWS_OIDC_ROLE_ARN }}
+      PRIVATEKEYS: ${{ secrets.PRIVATEKEYS }}
