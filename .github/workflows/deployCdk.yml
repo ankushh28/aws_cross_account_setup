@@ -49,6 +49,7 @@ jobs:
 
       - name: Install dependencies from requirements.txt
         run: |
+          ls -la
           pip install --upgrade pip
           pip install -r requirements.txt
 
