@@ -12,8 +12,7 @@ class AlarmCreatorStack(Stack):
 
         s3_construct = S3Construct(self, "S3Construct", bucket_name="entsrecwalarmcreator-testankush")
         lambda_construct = LambdaConstruct(
-            self, "LambdaConstruct", 
-            bucket=s3_construct.bucket,
+            self, "LambdaConstruct",
             function_name="entsrealarmcreator-testankush",
             code_path="src/lambda/alarmCreator",
             handler="index.handler",
