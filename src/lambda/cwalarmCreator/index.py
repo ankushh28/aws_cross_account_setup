@@ -1,7 +1,7 @@
 import os
 import json
 import boto3
-
+# comment
 REQUIRED_ENV_VARS = {
     "S3_BUCKET": "S3 bucket name",
     "S3_KEY": "S3 object key",
