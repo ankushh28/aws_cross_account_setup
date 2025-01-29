@@ -14,7 +14,7 @@ class AlarmCreatorStack(Stack):
         lambda_construct = LambdaConstruct(
             self, "LambdaConstruct",
             function_name="entsrealarmcreator-testankush",
-            code_path="src/lambda/alarmCreator",
+            code_path="src/lambda/cwalarmCreator",
             handler="index.handler",
             runtime=lambda_.Runtime.PYTHON_3_8,
             environment={
