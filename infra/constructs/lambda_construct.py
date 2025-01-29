@@ -1,4 +1,4 @@
-from aws_cdk import core
+from aws_cdk as core
 from aws_cdk import aws_s3 as s3
 from aws_cdk import aws_lambda as lambda_
 from aws_cdk import aws_events as events
