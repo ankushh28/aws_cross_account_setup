@@ -60,7 +60,7 @@ jobs:
         run: |
           pwd
           pip install --upgrade pip
-          pip install -r requirements.txt
+          python -m pip install -r requirements.txt
 
       - name: Install AWS CDK
         run: |
@@ -90,7 +90,7 @@ jobs:
             pwd
             cd $dir
             pwd
-            pip install -r requirements.txt
+            python -m pip install -r requirements.txt
             pip install aws-cdk-lib
             cdk synth
             cdk deploy --require-approval never --verbose --region ${{ inputs.aws_region }}
