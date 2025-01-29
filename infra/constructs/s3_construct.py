@@ -1,5 +1,4 @@
 from aws_cdk import (
-    core,
     aws_s3 as s3
 )
 
@@ -9,6 +8,5 @@ class S3Construct(core.Construct):
         
         self.bucket = s3.Bucket(
             self, "S3Bucket",
-            bucket_name=bucket_name,
-            removal_policy=core.RemovalPolicy.RETAIN
+            bucket_name=bucket_name
         )
