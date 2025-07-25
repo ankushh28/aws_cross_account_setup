@@ -70,7 +70,7 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-region: ap-south-1
-          role-to-assume: arn:aws:iam::940482450825:role/deployment
+          role-to-assume: arn:aws:iam::988444681674:role/gith
 
       - name: Run additional commands (if any)
         if: ${{ inputs.additional_commands }}
